@@ -3,10 +3,43 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+/**
+ * 
+ * @author lucas.caumo
+ * @author samuel.rockenbach
+ *
+ */
 public class Radix 
 {
-   
-	// A utility function to get maximum value in arr[]
+    /**
+     * Funcao principal que realiza ordenacao Radix
+     * 
+     * @param arr
+     * @param n
+     */
+    public void radixsort(int arr[], int n)
+    {
+    	/**
+    	 * Encontrar o maior numero para saber a quantidade de digitos
+    	 */
+        int m = getMax(arr, n);
+ 
+        /**
+         *  Fazer count-sort para cada dígito.
+         *  
+         *  Ao invez de usar o dígitio, o laço é iterado 
+         *   com exponencial de 10^digito
+         */
+        for (int exp = 1; m / exp > 0; exp *= 10)
+            countSort(arr, n, exp);
+    }
+
+	/**
+	 * Funcao para buscar maior valor do vetor[]
+	 * @param arr
+	 * @param n
+	 * @return
+	 */
     public int getMax(int arr[], int n)
     {
         int mx = arr[0];
@@ -16,8 +49,14 @@ public class Radix
         return mx;
     }
  
-    // A function to do counting sort of arr[] according to
-    // the digit represented by exp.
+    /**
+     * Funcao para realizar count-sort do vetor arr[] de acordo com o 
+     * digito representado pelo exponencial 
+     * 
+     * @param arr
+     * @param n
+     * @param exp
+     */
     public void countSort(int arr[], int n, int exp)
     {
         int output[] = new int[n]; // output array
@@ -25,44 +64,42 @@ public class Radix
         int count[] = new int[10];
         Arrays.fill(count, 0);
  
-        // Store count of occurrences in count[]
+        /**
+         * armazenar as ocorrencias em count[]
+         */
         for (i = 0; i < n; i++)
             count[(arr[i] / exp) % 10]++;
  
-        // Change count[i] so that count[i] now contains
-        // actual position of this digit in output[]
+        /**
+         * Mudar count[i] para que count[i] 
+         *  contenha a posicao do digito em output[]
+         */
         for (i = 1; i < 10; i++)
             count[i] += count[i - 1];
  
-        // Build the output array
+        /**
+         * Construir o vetor de saida
+         */
         for (i = n - 1; i >= 0; i--) {
             output[count[(arr[i] / exp) % 10] - 1] = arr[i];
             count[(arr[i] / exp) % 10]--;
         }
  
-        // Copy the output array to arr[], so that arr[] now
-        // contains sorted numbers according to current
-        // digit
+        /**
+         * Copiar o vetor de saida para arr[] para que arr[] agora
+         *  contenha os numeros de acordo com o digito atual
+         */
         for (i = 0; i < n; i++)
             arr[i] = output[i];
     }
  
-    // The main function to that sorts arr[] of
-    // size n using Radix Sort
-    public void radixsort(int arr[], int n)
-    {
-        // Find the maximum number to know number of digits
-        int m = getMax(arr, n);
- 
-        // Do counting sort for every digit. Note that
-        // instead of passing digit number, exp is passed.
-        // exp is 10^i where i is current digit number
-        for (int exp = 1; m / exp > 0; exp *= 10)
-            countSort(arr, n, exp);
-    }
- 
-    // A utility function to print an array
-    public void print(int arr[], int n)
+    /**
+     * Imprimir vetor na tela
+     *  
+     * @param arr
+     * @param n
+     */
+        public void print(int arr[], int n)
     {
         for (int i = 0; i < n; i++)
             System.out.print(arr[i] + " ");

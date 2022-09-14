@@ -14,7 +14,6 @@ public class RadixTest {
 		int arr[] = { 170, 45, 75, 90, 802, 24, 2, 66 };
 	    int n = arr.length;
 
-	    // Function Call
 	    r.radixsort(arr, n);
 	    r.print(arr, n);
 	}
@@ -24,10 +23,9 @@ public class RadixTest {
 		
 		Radix r = new Radix();
 		
-		int arr[] = { 221, 442, 663, 883 };
+		int arr[] = { 110, 221, 442, 663, 884, 1105, 1326, 1547, 1768, 1989 };
 	    int n = arr.length;
 
-	    // Function Call
 	    r.radixsort(arr, n);
 	    r.print(arr, n);
 	}
