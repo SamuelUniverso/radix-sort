@@ -67,15 +67,17 @@ public class Radix
         /**
          * armazenar as ocorrencias em count[]
          */
-        for (i = 0; i < n; i++)
+        for (i = 0; i < n; i++) {
             count[(arr[i] / exp) % 10]++;
+        }
  
         /**
          * Mudar count[i] para que count[i] 
          *  contenha a posicao do digito em output[]
          */
-        for (i = 1; i < 10; i++)
+        for (i = 1; i < 10; i++) {
             count[i] += count[i - 1];
+        }
  
         /**
          * Construir o vetor de saida
@@ -89,8 +91,9 @@ public class Radix
          * Copiar o vetor de saida para arr[] para que arr[] agora
          *  contenha os numeros de acordo com o digito atual
          */
-        for (i = 0; i < n; i++)
+        for (i = 0; i < n; i++) {
             arr[i] = output[i];
+        }
     }
  
     /**
